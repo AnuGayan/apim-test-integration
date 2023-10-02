@@ -96,7 +96,7 @@ wget -q https://integration-testgrid-resources.s3.amazonaws.com/lib/jdbc/${db_fi
 
 sed -i "s|DB_HOST|${CF_DB_HOST}|g" ${INFRA_JSON}
 sed -i "s|DB_USERNAME|${CF_DB_USERNAME}|g" ${INFRA_JSON}
-sed -i "s|DB_PASSWORD|${CF_DB_PASSWORD}|g" ${INFRA_JSON}PRODUCT_APIM_TEST_GROUPS
+sed -i "s|DB_PASSWORD|${CF_DB_PASSWORD}|g" ${INFRA_JSON}
 sed -i "s|DB_NAME|${DB_NAME}|g" ${INFRA_JSON}
 
 export_db_params ${DB_TYPE}
