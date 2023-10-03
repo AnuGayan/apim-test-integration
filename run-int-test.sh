@@ -85,7 +85,7 @@ function export_db_params(){
 source /etc/environment
 
 log_info "Clone Product repository"
-if [ ! -d $PRODUCT_REPOSITORY ];
+if [ ! -d $PRODUCT_REPOSITORY_NAME ];
 then
     git clone https://${GIT_USER}:${GIT_PASS}@$PRODUCT_REPOSITORY --branch $PRODUCT_REPOSITORY_BRANCH --single-branch
 fi
