@@ -85,7 +85,10 @@ function export_db_params(){
 source /etc/environment
 
 log_info "Clone Product repository"
-git clone https://${GIT_USER}:${GIT_PASS}@$PRODUCT_REPOSITORY --branch $PRODUCT_REPOSITORY_BRANCH --single-branch
+if [ ! -d $PRODUCT_REPOSITORY ];
+then
+    git clone https://${GIT_USER}:${GIT_PASS}@$PRODUCT_REPOSITORY --branch $PRODUCT_REPOSITORY_BRANCH --single-branch
+fi
 
 log_info "Exporting JDK"
 install_jdk ${JDK_TYPE}
@@ -100,6 +103,8 @@ sed -i "s|DB_PASSWORD|${CF_DB_PASSWORD}|g" ${INFRA_JSON}
 sed -i "s|DB_NAME|${DB_NAME}|g" ${INFRA_JSON}
 
 export_db_params ${DB_TYPE}
+# delete if the folder is available
+rm -rf $$PRODUCT_REPOSITORY_PACK_DIR
 
 mkdir -p $PRODUCT_REPOSITORY_PACK_DIR
 log_info "Copying product pack to Repository"
