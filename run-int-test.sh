@@ -92,8 +92,12 @@ fi
 
 log_info "Exporting JDK"
 install_jdk ${JDK_TYPE}
-log_info "Executing product test ${TEST_GROUP}"
-export PRODUCT_APIM_TEST_GROUPS=${TEST_GROUP}
+if [ -n "$TEST_GROUP" ];
+then
+    log_info "Executing product test ${TEST_GROUP}"
+    export PRODUCT_APIM_TEST_GROUPS=${TEST_GROUP}
+fi
+
 db_file=$(jq -r '.jdbc[] | select ( .name == '\"${DB_TYPE}\"') | .file_name' ${INFRA_JSON})
 wget -q https://integration-testgrid-resources.s3.amazonaws.com/lib/jdbc/${db_file}.jar  -P $TESTGRID_DIR/${PRODUCT_PACK_NAME}/repository/components/lib
 
