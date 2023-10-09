@@ -94,7 +94,7 @@ log_info "Exporting JDK"
 install_jdk ${JDK_TYPE}
 if [ -n "$TEST_GROUP" ];
 then
-    log_info "Executing product test ${TEST_GROUP}"
+    log_info "Executing product test for ${TEST_GROUP}"
     export PRODUCT_APIM_TEST_GROUPS=${TEST_GROUP}
 fi
 
